@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import Switchers from './Switchers';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        Grupo 23
-      </div>
+      <BrowserRouter>
+        <Switchers />
+      </BrowserRouter>
     );
   }
 }
