@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
 
 class Categories extends React.Component {
@@ -26,7 +27,14 @@ class Categories extends React.Component {
       <div>
         <h3>Categorias:</h3>
         {categories
-          .map(({ name, id }) => <li data-testid="category" key={ id }>{name}</li>)}
+          .map(({ name, id }) => (
+            <Link
+              to={ `/category/${id}` }
+              data-testid="category"
+              key={ id }
+            >
+              {name}
+            </Link>))}
       </div>
     );
   }

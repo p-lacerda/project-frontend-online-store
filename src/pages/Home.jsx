@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
+import SearchInput from '../components/inputs/SearchInput';
 import SearchProduct from '../components/SearchProduct';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShoppingCart from '../services/image/ShoppingCart.svg';
@@ -41,20 +42,11 @@ class Home extends React.Component {
           <ul>
             <Categories />
           </ul>
-          <input
+          <SearchInput
             name={ product }
-            onChange={ this.handleChange }
-            id="input"
-            type="text"
-            data-testid="query-input"
+            handleChange={ this.handleChange }
+            handleClick={ this.handleClick }
           />
-          <button
-            type="submit"
-            data-testid="query-button"
-            onClick={ this.handleClick }
-          >
-            Pesquisar
-          </button>
           <Link to="/cart" data-testid="shopping-cart-button">
             <img src={ ShoppingCart } alt="shopping cart" />
           </Link>
