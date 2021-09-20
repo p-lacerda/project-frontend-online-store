@@ -1,27 +1,71 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
+import SearchProduct from '../components/SearchProduct';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShoppingCart from '../services/image/ShoppingCart.svg';
 
 class Home extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      search: [],
+      product: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleChange({ target }) {
+    const { value } = target;
+    this.setState({
+      product: value,
+    });
+  }
+
+  async handleClick() {
+    const { product } = this.state;
+    const response = await getProductsFromCategoryAndQuery(null, product);
+    this.setState({
+      search: response.results,
+    });
+  }
+
   render() {
+    const { search, product } = this.state;
     return (
-      <section>
-        <ul>
-          <Categories />
-        </ul>
-        <input
-          name="input"
-          id="input"
-          type="text"
-        />
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ ShoppingCart } alt="shopping cart" />
-        </Link>
-        <h3 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
-      </section>
+      <main>
+        <section>
+          <ul>
+            <Categories />
+          </ul>
+          <input
+            name={ product }
+            onChange={ this.handleChange }
+            id="input"
+            type="text"
+            data-testid="query-input"
+          />
+          <button
+            type="submit"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+          </button>
+          <Link to="/cart" data-testid="shopping-cart-button">
+            <img src={ ShoppingCart } alt="shopping cart" />
+          </Link>
+          <h3 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h3>
+        </section>
+        <section>
+          <SearchProduct stateSearch={ search } />
+        </section>
+      </main>
     );
   }
 }
