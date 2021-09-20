@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categories from '../components/Categories';
 import ShoppingCart from '../services/image/ShoppingCart.svg';
 
 class Home extends React.Component {
   render() {
     return (
       <section>
+        <ul>
+          <Categories />
+        </ul>
         <input
           name="input"
           id="input"
