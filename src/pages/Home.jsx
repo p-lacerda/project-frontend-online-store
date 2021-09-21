@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import SearchInput from '../components/inputs/SearchInput';
-import SearchProduct from '../components/SearchProduct';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShoppingCart from '../services/image/ShoppingCart.svg';
+import ProductCard from '../components/ProductCard';
 
 class Home extends React.Component {
   constructor() {
@@ -55,7 +55,7 @@ class Home extends React.Component {
           </h3>
         </section>
         <section>
-          <SearchProduct stateSearch={ search } />
+          <ProductCard stateSearch={ search } />
         </section>
       </main>
     );
