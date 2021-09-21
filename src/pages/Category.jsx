@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SearchInput from '../components/inputs/SearchInput';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from '../components/ProductCard';
 
 class Category extends React.Component {
   constructor() {
@@ -55,14 +56,7 @@ class Category extends React.Component {
           handleChange={ this.handleChange }
           handleClick={ this.handleClick }
         />
-        {idProducts
-          .map((product) => (
-            <li
-              data-testid="product"
-              key={ product.id }
-            >
-              {product.title}
-            </li>))}
+        <ProductCard stateSearch={ idProducts } />
       </div>
     );
   }
