@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ShoppingCart from '../services/image/ShoppingCart.svg';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -30,11 +32,33 @@ class ProductDetails extends React.Component {
   render() {
     const { idProduct, arrayProducts } = this.state;
     if (arrayProducts.length === 0) return <span>Carregando...</span>;
-    const testando = arrayProducts.find((product) => product.id === idProduct);
-    if (testando === undefined) return <h3>Produto indisponível...</h3>;
+    const findProduct = arrayProducts.find((product) => product.id === idProduct);
+    if (findProduct === undefined) return <h3>Produto indisponível...</h3>;
+
     return (
       <div>
-        <p data-testid="product-detail-name">{testando.title}</p>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src={ ShoppingCart } alt="shopping cart" />
+        </Link>
+        <div>
+          <p data-testid="product-detail-name">{findProduct.title}</p>
+          <img src={ findProduct.thumbnail } alt="foto-produto" width="250px" />
+          <p>
+            PREÇO: R$
+            {findProduct.price}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={ () => {
+            const localStorageValue = JSON.parse(localStorage.getItem('carrinho'));
+            const saveLocal = [...localStorageValue, findProduct];
+            localStorage.setItem('carrinho', JSON.stringify(saveLocal));
+          } }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho!
+        </button>
       </div>
     );
   }
