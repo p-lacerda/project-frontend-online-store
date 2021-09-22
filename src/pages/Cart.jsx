@@ -13,7 +13,6 @@ class Cart extends React.Component {
         </Link>
         <img src={ BoxOpen } alt="Box Open Empty" />
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-
       </section>
     );
   }
