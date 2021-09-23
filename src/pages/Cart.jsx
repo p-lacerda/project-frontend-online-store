@@ -8,6 +8,14 @@ import BoxOpen from '../services/image/package-box-open.svg';
 class Cart extends React.Component {
   render() {
     const storage = JSON.parse(localStorage.getItem('carrinho'));
+    if (storage.length === 0) {
+      return (
+        <section>
+          <img src={ BoxOpen } alt="Box Open Empty" />
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        </section>
+      );
+    }
     return (
       <section>
         <Link to="/">
@@ -16,8 +24,7 @@ class Cart extends React.Component {
         <Link to="/cart" data-testid="shopping-cart-button">
           <img src={ ShoppingCart } alt="shopping cart" />
         </Link>
-        <img src={ BoxOpen } alt="Box Open Empty" />
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+
         <ul>
           {storage.map((product) => (
             <li
@@ -28,6 +35,14 @@ class Cart extends React.Component {
             </li>))}
         </ul>
         <p data-testid="shopping-cart-product-quantity">{storage.length}</p>
+        <Link to="/checkout">
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            Finaliza Compra
+          </button>
+        </Link>
       </section>
     );
   }

@@ -25,15 +25,36 @@ class Checkout extends React.Component {
     });
   }
 
+  getShoppingCart = () => {
+    const storage = JSON.parse(localStorage.getItem('carrinho'));
+    const amount = storage.map(({ price }) => price);
+    const totalPrice = amount.reduce((sum, price) => sum + price);
+    return (
+      <div>
+        {storage.map((product) => (
+          <div key={ product.id }>
+            <img src={ product.thumbnail } alt={ product.id } />
+            <h4>{product.title}</h4>
+            <h5>{product.price}</h5>
+          </div>
+        ))}
+        <h4>
+          Total:
+          { totalPrice.toFixed(2) }
+        </h4>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
+        {this.getShoppingCart()}
         <section>
           <h3>Revise Seus Produto</h3>
           {/* <Produtos /> */}
           {' '}
           {/* Adicionar produtos que estao no carrinho */}
-          <h4>total:</h4>
         </section>
         <section>
           <h3>Informações do Comprador</h3>

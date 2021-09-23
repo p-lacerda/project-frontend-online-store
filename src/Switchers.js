@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Category from './pages/Category';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/ Checkout';
 
 class Switchers extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Switchers extends React.Component {
         <Route path="/cart" component={ Cart } />
         <Route path="/category/:id" component={ Category } />
         <Route path="/product/:id" component={ ProductDetails } />
+        <Route path="/checkout" component={ Checkout } />
       </Switch>
     );
   }
