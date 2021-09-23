@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Comments from '../components/Comments';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShoppingCart from '../services/image/ShoppingCart.svg';
 
@@ -59,6 +60,11 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho!
         </button>
+
+        <div>
+          <Comments />
+        </div>
+
       </div>
     );
   }
