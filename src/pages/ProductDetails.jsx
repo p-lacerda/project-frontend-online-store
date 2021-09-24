@@ -29,6 +29,7 @@ class ProductDetails extends React.Component {
   }
 
   addCartItem(product) {
+    console.log(product);
     const cartStorage = JSON.parse(localStorage.getItem('carrinho'));
     const findItem = cartStorage.find((cart) => cart.id === product.id);
     if (findItem !== undefined) {
@@ -48,11 +49,12 @@ class ProductDetails extends React.Component {
     if (arrayProducts.length === 0) return <span>Carregando...</span>;
     const findProduct = arrayProducts.find((product) => product.id === idProduct);
     if (findProduct === undefined) return <h3>Produto indisponível...</h3>;
-
+    const free = findProduct.shipping.free_shipping;
     return (
       <div>
         <div>
           <p data-testid="product-detail-name">{findProduct.title}</p>
+          {free ? <h5 data-testid="free-shipping">Frete Gratis</h5> : false}
           <img src={ findProduct.thumbnail } alt="foto-produto" width="250px" />
           <p>
             PREÇO: R$

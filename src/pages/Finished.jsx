@@ -5,7 +5,6 @@ class Finished extends React.Component {
   render() {
     localStorage.setItem('carrinho', JSON.stringify([]));
     const infUser = JSON.parse(localStorage.getItem('finish'));
-    console.log(infUser);
     return (
       <div>
         <h1>{`Obrigado por comprar com a gente ${infUser.nome}!`}</h1>
