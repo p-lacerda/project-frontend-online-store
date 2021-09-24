@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import SearchInput from '../components/inputs/SearchInput';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
 import ProductCard from '../components/ProductCard';
 
 class Home extends React.Component {
@@ -43,9 +41,6 @@ class Home extends React.Component {
     return (
       <main>
         <section className="home">
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src={ ShoppingCart } alt="shopping cart" />
-          </Link>
           <ul>
             <Categories />
           </ul>

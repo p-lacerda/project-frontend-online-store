@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import SearchInput from '../components/inputs/SearchInput';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../components/ProductCard';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
 
 class Category extends React.Component {
   constructor() {
@@ -54,9 +52,6 @@ class Category extends React.Component {
     const { idProducts } = this.state;
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ ShoppingCart } alt="shopping cart" />
-        </Link>
         <SearchInput
           handleChange={ this.handleChange }
           handleClick={ this.handleClick }

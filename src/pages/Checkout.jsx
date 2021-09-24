@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FormCheckout from '../components/inputs/FormCheckout';
 
 class Checkout extends React.Component {
@@ -15,6 +16,7 @@ class Checkout extends React.Component {
       numero: '',
       cidade: '',
       estado: '',
+      priceTotal: '',
     };
   }
 
@@ -25,9 +27,17 @@ class Checkout extends React.Component {
     });
   }
 
+  handleClick = () => {
+    localStorage.setItem('finish', JSON.stringify(this.state));
+  }
+
   getShoppingCart = () => {
     const storage = JSON.parse(localStorage.getItem('carrinho'));
-    const amount = storage.map(({ price }) => price);
+    if (storage.length === 0) return <p>Nenhuma produto no carrinho</p>;
+    const amount = storage.map((producto) => {
+      const price = producto.price * producto.quantity;
+      return price;
+    });
     const totalPrice = amount.reduce((sum, price) => sum + price);
     return (
       <div>
@@ -47,14 +57,12 @@ class Checkout extends React.Component {
   }
 
   render() {
+    const { nome } = this.state;
     return (
       <div>
-        {this.getShoppingCart()}
+        <h3>Revise Seus Produto</h3>
         <section>
-          <h3>Revise Seus Produto</h3>
-          {/* <Produtos /> */}
-          {' '}
-          {/* Adicionar produtos que estao no carrinho */}
+          {this.getShoppingCart()}
         </section>
         <section>
           <h3>Informações do Comprador</h3>
@@ -100,12 +108,15 @@ class Checkout extends React.Component {
             Elo
           </label>
         </section>
-        <button
-          data-testid="checkout-products"
-          type="submit"
-        >
-          Finalizar
-        </button>
+        <Link to={ `/checkout/${nome}` }>
+          <button
+            data-testid="checkout-products"
+            type="submit"
+            onClick={ this.handleClick }
+          >
+            Finalizar
+          </button>
+        </Link>
       </div>
     );
   }

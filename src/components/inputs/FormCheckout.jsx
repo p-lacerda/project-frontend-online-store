@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FormCheckout extends React.Component {
   render() {
@@ -91,5 +92,10 @@ class FormCheckout extends React.Component {
     );
   }
 }
+
+FormCheckout.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  value: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default FormCheckout;
