@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import SearchInput from '../components/inputs/SearchInput';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ShoppingCart from '../services/image/ShoppingCart.svg';
 import ProductCard from '../components/ProductCard';
 
 class Home extends React.Component {
@@ -42,24 +40,23 @@ class Home extends React.Component {
     const { search, product } = this.state;
     return (
       <main>
-        <section>
+        <section className="home">
           <ul>
             <Categories />
           </ul>
-          <SearchInput
-            name={ product }
-            handleChange={ this.handleChange }
-            handleClick={ this.handleClick }
-          />
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src={ ShoppingCart } alt="shopping cart" />
-          </Link>
-          <h3 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h3>
-        </section>
-        <section>
-          <ProductCard stateSearch={ search } />
+          <div>
+            <h3 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h3>
+            <SearchInput
+              name={ product }
+              handleChange={ this.handleChange }
+              handleClick={ this.handleClick }
+            />
+            <section>
+              <ProductCard stateSearch={ search } />
+            </section>
+          </div>
         </section>
       </main>
     );
